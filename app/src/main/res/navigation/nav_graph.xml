@@ -7,12 +7,17 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.lovecalculator.HomeFragment"
+        android:name="com.example.lovecalculator.ui.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.example.lovecalculator.ResultFragment"
+        android:name="com.example.lovecalculator.ui.ResultFragment"
         android:label="fragment_result"
         tools:layout="@layout/fragment_result" />
+    <fragment
+        android:id="@+id/boardFragment"
+        android:name="com.example.lovecalculator.ui.BoardFragment"
+        android:label="fragment_board"
+        tools:layout="@layout/fragment_board" />
 </navigation>
