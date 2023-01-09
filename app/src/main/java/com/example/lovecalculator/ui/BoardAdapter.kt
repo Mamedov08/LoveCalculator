@@ -1,6 +1,7 @@
 package com.example.lovecalculator.ui
 
 import android.content.Context
+import android.net.http.SslCertificate.saveState
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,7 @@ import com.example.lovecalculator.Prefs
 import com.example.lovecalculator.databinding.ItemBoardBinding
 import com.example.lovecalculator.model.Board
 
-class BoardAdapter(val context: Context, val navController: NavController) : Adapter<BoardAdapter.BoardViewHolder>() {
+class BoardAdapter( val navController: NavController, private val startClick: () -> Unit) : Adapter<BoardAdapter.BoardViewHolder>() {
 
 private val list = ArrayList<Board>()
 
@@ -42,14 +43,9 @@ private val list = ArrayList<Board>()
                 binding.start.visibility = View.INVISIBLE
             }
             binding.start.setOnClickListener {
-                Prefs().saveState(context)
+                 startClick()
                 navController.navigateUp()
             }
-
-
-
         }
     }
-
-
 }

@@ -1,24 +1,27 @@
 package com.example.lovecalculator.ui
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.example.lovecalculator.App
 import com.example.lovecalculator.Prefs
 import com.example.lovecalculator.R
 import com.example.lovecalculator.databinding.FragmentHomeBinding
+import com.example.lovecalculator.history.HistoryFragment
 import com.example.lovecalculator.main.LoveViewModel
-import com.example.lovecalculator.showToast
+import com.example.lovecalculator.room.AppDataBase
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class HomeFragment : Fragment() {
+class HomeFragment @Inject constructor(private val prefs : Prefs, private val dataBase: AppDataBase) : Fragment() {
+
 
 
 
@@ -49,21 +52,22 @@ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 }
 private fun initClicker() {
     with(binding) {
+        historyBtn.setOnClickListener{
+            findNavController().navigate(R.id.historyFragment)
+        }
         calculateBtn.setOnClickListener {
+
             viewModel.getLiveLoveModel(firstNameEd.text.toString(),
                 secondNameEd.text.toString()
-            ).observe(viewLifecycleOwner , {
-                   activity?.showToast(requireContext(),"hello")
-                  Log.e("ololo", "initClicker: ${it}",)
-
-                })
-
+            ).observe(viewLifecycleOwner) {
+                dataBase.getDao().insertLove(it)
+            }
         }
     }
 }
 
     private fun onBoard() {
-        if (!Prefs().isShown(requireContext())) {
+        if (!prefs.isShown()) {
             findNavController().navigate(R.id.boardFragment)
         }
     }

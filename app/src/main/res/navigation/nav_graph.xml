@@ -20,4 +20,9 @@
         android:name="com.example.lovecalculator.ui.BoardFragment"
         android:label="fragment_board"
         tools:layout="@layout/fragment_board" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.lovecalculator.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>
