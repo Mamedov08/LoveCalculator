@@ -33,7 +33,7 @@ private val list = ArrayList<Board>()
 
     inner class BoardViewHolder(private val binding :ItemBoardBinding) : ViewHolder(binding.root) {
         fun bind(board: Board) {
-            binding.image.setImageResource(board.image)
+            binding.image.setAnimation(board.image)
             binding.title.text = board.title
             binding.desk.text = board.desk
 
